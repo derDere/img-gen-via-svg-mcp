@@ -202,13 +202,13 @@ Accepted values, and what each one can carry:
 | `png` | `.png` | yes | Default. 8-bit RGBA. |
 | `jpeg` | `.jpg`, `.jpeg` | no | No alpha channel. Transparency and `contain` padding are flattened per §4.6 — against `background`, or against white when none is given, with an `alpha_flattened` warning. |
 | `bmp` | `.bmp` | yes | Written as a 32-bit BITMAPV4 bitmap with a real alpha channel when alpha is present, so `contain` padding stays transparent. See §4.6 for writing an opaque BMP instead. |
-| `gif` | `.gif` | 1-bit | Palette of at most 256 colours; quantisation raises a `color_quantized` warning. Alpha is reduced to fully transparent or fully opaque. |
-| `tiff` | `.tif`, `.tiff` | yes | Uncompressed or Deflate, see `tiff_compression`. |
+| `gif` | `.gif` | 1-bit | Palette of at most 256 colours, chosen by the encoder; every GIF raises a `color_quantized` warning. Alpha is reduced to fully transparent or fully opaque. |
+| `tiff` | `.tif`, `.tiff` | yes | Written with the encoder's own compression, which is not selectable. |
 | `webp` | `.webp` | yes | **Lossless only.** The encoder in use has no lossy WebP path; `jpeg_quality` is ignored for WebP and a `lossless_only` warning is raised if it was set. |
 | `ico` | `.ico` | yes | Single image here; multi-resolution icons belong to `render_icon`. Each dimension must be ≤ 256. |
 | `tga` | `.tga` | yes | |
 | `qoi` | `.qoi` | yes | |
-| `avif` | `.avif` | yes | Encoding only; the build has no AVIF decoder. |
+| `avif` | `.avif` | yes | Only in a build with the `avif` Cargo feature, which is off by default because the encoder is slow to compile. Encoding only; there is no AVIF decoder. `get_capabilities` reports whether this build has it. |
 | `pnm` | `.pnm`, `.ppm`, `.pgm`, `.pbm` | no | Flattened per §4.6. |
 | `farbfeld` | `.ff` | yes | |
 | `openexr` | `.exr` | yes | 32-bit float; the 8-bit render is converted. |
@@ -305,11 +305,16 @@ not onto white, except where the flattening rule above applies.
 | --- | --- | --- | --- | --- |
 | `jpeg_quality` | integer | 1–100 | `90` | `jpeg` |
 | `png_compression` | string | `fast`, `default`, `best`, `none`, or `level:0`…`level:9` | `default` | `png` |
-| `png_optimize` | boolean | — | `false` | `png` — runs a lossless post-optimisation pass over the encoded file. Slower; typically 10–30 % smaller. |
-| `tiff_compression` | string | `none`, `deflate`, `lzw`, `packbits` | `deflate` | `tiff` |
-| `gif_dither` | boolean | — | `true` | `gif` |
+| `png_optimize` | boolean | — | `false` | `png` — runs a lossless post-optimisation pass over the encoded file. Slower; typically 10–30 % smaller, and the decoded pixels are identical. |
 | `dpi` | number | 1–5000 | `96` | Unit resolution while parsing the SVG. Affects how `mm`, `cm`, `in` and `pt` lengths resolve to user units, and therefore the derived source size. |
-| `density_metadata` | number or null | 1–5000 | `null` | Physical resolution recorded in the output file's metadata, in DPI. Independent of `dpi`. Only PNG, JPEG and TIFF can carry it; for any other format it raises a `metadata_unsupported` warning. |
+| `density_metadata` | number or null | 1–5000 | `null` | Physical resolution recorded in the output file's metadata, in DPI. Independent of `dpi`. PNG carries it in a `pHYs` chunk and JPEG in its JFIF header; every other format raises a `metadata_unsupported` warning. |
+
+An encoder option given for a format it does not apply to is reported rather
+than ignored: `jpeg_quality` on a PNG raises `option_ignored`, and on a WebP it
+raises `lossless_only`, because the WebP encoder here has no lossy path at all.
+
+TIFF compression and GIF dithering are not selectable. The encoders decide, and
+the results are deterministic; there is no parameter that pretends otherwise.
 
 `dpi` and `density_metadata` are deliberately separate. `dpi` changes what gets
 rendered; `density_metadata` changes only what a downstream program reads out of
@@ -339,7 +344,7 @@ call.
 | `fonts.extra_dirs` | string[] | `[]` | Additional font directories for this call, loaded on top of the start-up database. |
 | `fonts.extra_files` | string[] | `[]` | Additional font files for this call. |
 | `fonts.skip_system_fonts` | boolean | from configuration | When `true`, the system font directories are ignored and only `fonts.extra_dirs`, `fonts.extra_files` and the operator's configured font paths are used. |
-| `on_missing_font` | string | `warn` | `warn` — substitute and report. `error` — refuse to render with a `font_missing` error naming every unresolvable family. |
+| `on_missing_font` | string | `warn` | `warn` — render what can be rendered and report the rest. `error` — refuse to render with a `font_missing` error naming every unavailable family. |
 | `languages` | string[] | `["en"]` | Resolves the `systemLanguage` conditional attribute. |
 | `text_rendering` | string | `optimize_legibility` | `optimize_speed`, `optimize_legibility`, `geometric_precision`. |
 
@@ -365,16 +370,23 @@ Generic families resolve differently per platform and are reported by
 `get_capabilities`. The operator pins them in configuration when a fixed result
 matters.
 
-#### 4.8.2 Missing fonts are never silent
+#### 4.8.2 A missing font loses the text, and says so
 
-When the SVG asks for a family the database cannot supply, the result carries a
-`font_substituted` warning naming the requested family, the weight and style
-asked for, the family actually used, and the text runs affected. This is part of
-the M5 fidelity contract: a document rendered in a different typeface has been
-rendered wrong, and the caller has to be told.
+When a text element names a `font-family` that the database cannot supply, the
+renderer draws **nothing** for that text. It does not fall back to another
+family: the text is simply absent from the image. The result therefore carries a
+`font_missing` warning naming the family and stating that consequence.
 
-A caller that cannot tolerate a substitution sets `on_missing_font: "error"`,
-or calls `probe_svg` first and reads `fonts_requested[].resolved`.
+This is the single most consequential gap in the fidelity contract, because a
+document whose text has vanished still looks like a valid image.
+
+The default family — the one used by text that names no family of its own — is a
+separate case and does substitute. When the configured `default_family` is not in
+the database, an available family is used in its place and the result carries a
+`font_substituted` warning naming both.
+
+A caller that cannot tolerate either sets `on_missing_font: "error"`, or calls
+`probe_svg` first and reads `fonts_requested[].resolved`.
 
 #### 4.8.3 Reproducible text across Linux and Windows
 
@@ -455,8 +467,6 @@ Renders one SVG to one raster image. This is the tool that discharges M1–M5.
 | `jpeg_quality` | integer | no | `90` | §4.7 |
 | `png_compression` | string | no | `default` | §4.7 |
 | `png_optimize` | boolean | no | `false` | §4.7 |
-| `tiff_compression` | string | no | `deflate` | §4.7 |
-| `gif_dither` | boolean | no | `true` | §4.7 |
 | `dpi` | number | no | `96` | §4.7 |
 | `density_metadata` | number or null | no | `null` | §4.7 |
 | `fonts` | object | no | `{}` | §4.8 |
@@ -587,7 +597,7 @@ Builds a multi-resolution icon from one SVG.
 | `fit` | string | no | `contain` | §4.3 |
 | `background` | string or null | no | `null` | §4.6 |
 | `padding_color` | string or null | no | `null` | §4.6 |
-| `overwrite`, `create_dirs`, `png_compression`, `png_optimize`, `dpi`, `fonts`, `languages`, `stylesheet`, `on_unsupported`, `resources_dir` | | no | as §4 | |
+| `overwrite`, `create_dirs`, `png_compression`, `png_optimize`, `dpi`, `fonts`, `on_missing_font`, `languages`, `stylesheet`, `on_unsupported`, `resources_dir` | | no | as §4 | |
 
 `ico` and `png_set` are the containers this server is built for. `icns` is a
 nice-to-have: the target platforms are Linux and Windows, and no supported
@@ -701,13 +711,13 @@ Normalises and shrinks an SVG document.
 | `return_mode` | string | no | `file` | `file`, `source` — return the optimised document as a string, `both`. |
 | `mode` | string | no | `normalize` | `normalize` — resolve the document through the renderer's own simplification pipeline and write it back out. `minify` — keep the document structure and only shorten it. |
 | `precision` | integer | no | `8` | 1–12. Decimal places for coordinates. |
-| `text_to_paths` | boolean | no | `false` | Convert text to outlines. Removes the font dependency and makes rendering reproducible anywhere; the text is no longer selectable or editable. |
+| `text_to_paths` | boolean | no | `false` | Convert text to outlines. Removes the font dependency and makes rendering reproducible anywhere; the outlines are not selectable or editable text. |
 | `overwrite`, `create_dirs`, `dpi`, `fonts`, `languages`, `resources_dir` | | no | as §4 | |
 
 `mode: "normalize"` is the strong one: it resolves CSS, inheritance, `use`
 references, nested transforms and unit conversions, and drops everything the
 renderer ignores. The result renders identically and is usually much smaller,
-but it is no longer the document the author wrote — grouping, ids and editing
+but it is not the document the author wrote — grouping, ids and editing
 structure are gone. `mode: "minify"` is the conservative one: whitespace,
 redundant attribute and numeric precision only, leaving the document editable.
 
@@ -752,7 +762,7 @@ so that this server can replace the general raster tooling of
 | `scale` | number | no | — | |
 | `fit` | string | no | `contain` | §4.3 |
 | `filter` | string | no | `lanczos3` | Resampling filter: `nearest`, `triangle`, `catmull_rom`, `gaussian`, `lanczos3`. |
-| `background`, `padding_color`, `transparent`, `jpeg_quality`, `png_compression`, `png_optimize`, `tiff_compression`, `gif_dither`, `density_metadata`, `overwrite`, `create_dirs`, `max_inline_bytes` | | no | as §4 | |
+| `background`, `padding_color`, `transparent`, `jpeg_quality`, `png_compression`, `png_optimize`, `density_metadata`, `overwrite`, `create_dirs`, `max_inline_bytes` | | no | as §4 | |
 
 Resampling a raster is not the same operation as rendering a vector. When the
 source is an SVG, `render_svg` is the correct tool and `convert_image` will
@@ -785,11 +795,18 @@ Reports what this build can actually do. Takes no parameters.
   "renderer": { "name": "resvg", "version": "0.48.1" },
   "encoder": { "name": "image", "version": "0.25.10" },
   "transports": ["stdio"],
-  "platform": "x86_64-unknown-linux-gnu",
+  "platform": "linux",
+  "architecture": "x86_64",
   "formats": {
-    "encode": ["png", "jpeg", "bmp", "gif", "tiff", "webp", "ico", "icns", "tga", "qoi", "avif", "pnm", "farbfeld", "openexr", "hdr"],
-    "decode": ["png", "jpeg", "bmp", "gif", "tiff", "webp", "ico", "tga", "qoi", "pnm", "farbfeld", "openexr", "hdr", "dds"],
-    "notes": { "webp": "lossless encoding only", "avif": "encoding only", "dds": "decoding only" }
+    "encode": ["png", "jpeg", "bmp", "gif", "tiff", "webp", "ico", "tga", "qoi", "pnm", "farbfeld", "openexr", "hdr"],
+    "encode_containers": ["ico", "png_set", "icns"],
+    "notes": {
+      "webp": "lossless encoding only",
+      "avif": "not built into this binary",
+      "gif": "at most 256 colours, alpha reduced to fully transparent or fully opaque",
+      "tiff": "written with the encoder's default compression",
+      "ico": "each image at most 256×256"
+    }
   },
   "svg_support": {
     "profile": "static SVG 1.1, partial SVG 2",
@@ -805,8 +822,11 @@ Reports what this build can actually do. Takes no parameters.
       { "code": "svg_tiny_1_2", "description": "SVG Tiny 1.2 specific features are not supported." },
       { "code": "foreign_object", "description": "foreignObject content is not rendered." },
       { "code": "filter_unsupported", "description": "An unresolvable filter drops its element, per the SVG specification." },
-      { "code": "font_missing", "description": "A requested font family that is absent is substituted and reported." },
-      { "code": "unresolved_reference", "description": "A referenced file or URL that cannot be resolved drops its element." }
+      { "code": "filter_displacement_scale", "description": "feDisplacementMap's scale is applied twice by this renderer." },
+      { "code": "font_missing", "description": "Text whose font family is absent is not rendered at all." },
+      { "code": "font_substituted", "description": "Text that names no family is drawn in an available default." },
+      { "code": "unresolved_reference", "description": "A referenced file or URL that cannot be resolved drops its element." },
+      { "code": "parser_diagnostic", "description": "Anything else the parser or renderer reported, passed through verbatim." }
     ]
   },
   "fonts": {
@@ -823,7 +843,9 @@ Reports what this build can actually do. Takes no parameters.
     "remote_svg_references": false,
     "default_fit": "contain",
     "max_pixels": 100000000,
-    "max_inline_bytes": 5242880
+    "max_inline_bytes": 5242880,
+    "render_timeout_ms": 30000,
+    "default_size": "100x100"
   }
 }
 ```
@@ -906,7 +928,7 @@ only be more restrictive than the configuration, never less.
 | `IMG_SVG_MCP_MAX_PIXELS` | `max_pixels` | `100000000` | Upper bound on `width * height`. |
 | `IMG_SVG_MCP_MAX_INLINE_BYTES` | `max_inline_bytes` | `5242880` | Upper bound for inline image content. |
 | `IMG_SVG_MCP_DEFAULT_SIZE` | `default_size` | `100x100` | Fallback intrinsic size, §4.2 rule 5. |
-| `IMG_SVG_MCP_RENDER_TIMEOUT_MS` | `render_timeout_ms` | `30000` | Per render. A document with pathological filters is aborted rather than hanging the server. **PENDING (Q-C):** whether a per-call `timeout_ms` parameter joins it. |
+| `IMG_SVG_MCP_RENDER_TIMEOUT_MS` | `render_timeout_ms` | `30000` | The budget for one render. A tool that produces several images in one call — `render_svg_batch`, `render_icon` — gets this budget multiplied by the number of images it was asked for. A call that exceeds it returns an error and the server stays responsive. **PENDING (Q-C):** whether a per-call `timeout_ms` parameter joins it. |
 
 ### 7.2 Path policy (M4)
 
@@ -1015,13 +1037,19 @@ document by `probe_svg`, and surfaced at render time as warnings — or, with
 | `svg_tiny_1_2` | SVG Tiny 1.2 specific elements. | Ignored. Warning. |
 | `foreign_object` | `foreignObject` — arbitrary HTML inside an SVG needs a browser engine. | Not rendered. Warning. |
 | `filter_unsupported` | A filter primitive outside the list in §9.1, or an unresolvable filter input. | Per the SVG specification, an element with an unresolvable filter is not rendered at all. Warning, and the warning says the element was dropped rather than drawn unfiltered. |
-| `font_missing` | A requested font family is not in the database. The installed families differ between Linux and Windows, so this is the gap most likely to appear on one platform and not the other. | A substitute is used and a `font_substituted` warning names both families. With `on_missing_font: "error"` the render is refused instead. §4.8.3 says how to take the host out of the equation. |
-| `unresolved_reference` | A referenced file or URL could not be resolved. | The referencing element is not drawn. Warning. |
+| `font_missing` | A text element names a font family that is not in the database. The installed families differ between Linux and Windows, so this is the gap most likely to appear on one platform and not the other. | **The text is not drawn at all**; there is no fallback to another family. `font_missing` warning naming the family. With `on_missing_font: "error"` the render is refused instead. §4.8.3 says how to take the host out of the equation. |
+| `font_substituted` | The configured default family — used by text that names none of its own — is not in the database. | An available family is used in its place. Warning naming both. |
+| `filter_displacement_scale` | `feDisplacementMap` in this renderer multiplies the displacement by the primitive's `scale` twice, so a document asking for `scale="38"` is displaced by about 1444 pixels and its content leaves the filter region entirely. | The image is rendered as the renderer produces it, and the warning names the defect, the effective displacement and the square-root value that produces the displacement the document asked for. §9.4 has the detail. |
+| `unresolved_reference` | A referenced file or URL could not be resolved, or a document references a remote resource while remote references are disabled. | The referencing element is not drawn. Warning. |
+| `parser_diagnostic` | The parser or the renderer reported something this catalogue does not classify further. | The message is passed through verbatim so that nothing the renderer says is swallowed. |
 
 ### 9.3 How the contract is enforced
 
-1. The parser's diagnostics are captured per call rather than only logged, and
-   every diagnostic becomes a structured warning in the result.
+1. The parser's **and the renderer's** diagnostics are captured per call rather
+   than only logged, and every diagnostic becomes a structured warning in the
+   result. Both stages matter: the parser reports what it could not resolve, the
+   renderer reports what it could not draw, and a capture around only the first
+   would miss an undecodable embedded image or a dropped filter.
 2. Before parsing, the document is scanned for the constructs in §9.2 that the
    parser discards without a diagnostic — `animate*`, `set`, `script`,
    `foreignObject`, `view`, `cursor` — so that they are reported even though the
@@ -1034,7 +1062,32 @@ document by `probe_svg`, and surfaced at render time as warnings — or, with
 
 Steps 1 and 2 together are what makes the promise in M5 keepable. A gap that is
 neither in §9.2 nor reported at runtime is a bug of the highest severity in this
-project, and [`TESTPLAN.md`](TESTPLAN.md) §7 describes the test that guards it.
+project, and [`TESTPLAN.md`](TESTPLAN.md) describes the tests that guard it —
+including one that fails the build when a catalogue entry has no document behind
+it.
+
+### 9.4 The `feDisplacementMap` defect
+
+The renderer computes a pixel's displacement as `channel × scale × scale`
+instead of `channel × scale`. The consequence is quadratic: `scale="5"` behaves
+like 25, `scale="10"` like 100, and `scale="38"` like 1444, at which point every
+pixel is sampled from outside the filter region and the filtered element renders
+empty.
+
+This server does not rewrite the document to compensate. A silent rewrite would
+produce a correct image today and a doubly-wrong one the day the renderer is
+fixed, and quietly editing the caller's document is exactly the behaviour this
+project exists to avoid. Instead:
+
+* every `feDisplacementMap` with `|scale| > 1` raises `filter_displacement_scale`;
+* the warning states the effective displacement and gives the square root of the
+  requested value, which is what produces the displacement the document asks for
+  as long as the defect is present;
+* `on_unsupported: "error"` refuses the render outright.
+
+A caller that wants the documented result today writes `scale="6.164"` where the
+document means 38. The demo corpus carries `filter-displacement.svg` as the
+standing witness for this, and a test asserts the warning is raised.
 
 ## 10. Stretch goal: animated SVG (O13)
 

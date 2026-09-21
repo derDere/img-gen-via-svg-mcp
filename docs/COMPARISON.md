@@ -71,7 +71,7 @@ Legend: ● full, ◐ partial or conditional, ○ absent, `?` unconfirmed.
 | DPI / density | ○ | ○ | ● | ○ | ● | ● | **●** | `render_svg` (`dpi`, `density_metadata`) |
 | Base64 / inline image result | ○ | ● | ● | ○ | ○ | ◐ `?` | **●** | `render_svg` (`return_mode`), `convert_image` |
 | Multi-resolution ICO | ○ | ○ | ○ | ● | ● | ● | **●** | `render_icon` |
-| ICNS | ○ | ○ | ○ | ● | ● | ● | **◐** specified, low priority | `render_icon` |
+| ICNS | ○ | ○ | ○ | ● | ● | ● | **●** behind a Cargo feature, on by default | `render_icon` |
 | SVGO-style optimisation | ○ | ○ | ● | ○ | ○ | ○ | **●** | `optimize_svg` |
 | Base64 ↔ image conversion | ○ | ○ | ● | ○ | ○ | ○ | **●** | `convert_image` |
 | Raster format conversion | ○ | ○ | ● | ○ | ● | ● | **●** | `convert_image` |
@@ -83,7 +83,7 @@ Legend: ● full, ◐ partial or conditional, ○ absent, `?` unconfirmed.
 | Inspect an SVG without rendering | ○ | ○ | ○ | ○ | ◐ `identify` | ◐ `identify` | **●** | `probe_svg` |
 | Declared capability and gap report | ○ | ○ | ○ | ○ | ○ | ○ | **●** | `get_capabilities` |
 | Per-call warnings on lost fidelity | ○ | ○ | ○ | ○ | ○ | ○ | **●** | every render tool |
-| Animated SVG → GIF/APNG | ○ | ○ | ○ | ○ | ◐ SMIL unsupported in practice | ◐ | **○** stretch goal | [`SPEC.md`](SPEC.md) §10 |
+| Animated SVG → GIF/APNG | ○ | ○ | ○ | ○ | ◐ SMIL unsupported in practice | ◐ | **○** stretch goal, not built | [`SPEC.md`](SPEC.md) §10 |
 | No external runtime dependency | ○ Node | ○ Node wrapper | ○ | ○ Node | ○ ImageMagick | ○ ImageMagick | **●** single static binary | — |
 
 ## Coverage summary
@@ -93,7 +93,7 @@ Legend: ● full, ◐ partial or conditional, ○ absent, `?` unconfirmed.
 | surferdot | yes | — |
 | svg-mcp | yes | — |
 | img-proc | yes, for its SVG and format-conversion surface | Raster editing beyond resize and format conversion — cropping, rotation, compositing — is out of scope. `convert_image` is not a general image editor. |
-| ppbong | yes | ICNS is specified but low priority ([`SPEC.md`](SPEC.md) §5.3) |
+| ppbong | yes | — |
 | magick | for SVG rendering, yes | ImageMagick's wider raster feature set is out of scope by design |
 | im-mcp | for SVG rendering, yes | as above |
 
@@ -120,4 +120,14 @@ Three things in this specification have no counterpart in any of the six:
    alpha channel.
 3. **Paths that are obeyed or refused.** No temporary directory, no silent
    redirect. An allowlist exists only if the operator configures one, and then
-   it produces an error naming the allowed directories.
+   it produces an error naming the allowed directories. A test asserts that the
+   allowed directory stays empty after a refusal, because a redirect is what it
+   exists to rule out.
+
+The first of those three is not a claim about intentions. The renderer under
+this server has a defect in `feDisplacementMap` that makes a documented filter
+render empty ([`SPEC.md`](SPEC.md) §9.4), and a font family that is not
+installed makes text vanish rather than change typeface. Both are in the
+catalogue, both are reported per document, and both have a document in the demo
+corpus that demonstrates them. None of the six surveyed servers would tell a
+caller either thing.

@@ -31,8 +31,8 @@ default trains agents to pass `overwrite: true` on every call, which removes the
 protection anyway. An operator who wants the protection can get a stronger one
 from a write-only output directory.
 
-**Currently in the specification:** `true`, marked PENDING in
-[`SPEC.md`](SPEC.md) §4.4.
+**Currently built:** `true`, marked PENDING in [`SPEC.md`](SPEC.md) §4.4.
+Changing it is a one-line change in `mcp/tools/render_svg.rs` and its siblings.
 
 ## Q-B — Are system fonts loaded by default?
 
@@ -52,8 +52,11 @@ and `on_missing_font: "error"` turns it into a refusal. Reproducibility across
 platforms is available on demand via [`SPEC.md`](SPEC.md) §4.8.3 and does not
 need to be the default.
 
-**Currently in the specification:** loaded, marked PENDING in
-[`SPEC.md`](SPEC.md) §7.4.
+**Currently built:** loaded, marked PENDING in [`SPEC.md`](SPEC.md) §7.4. The
+consequence is sharper than the specification first assumed: a font family that
+is missing does not change typeface, it makes the text disappear
+([`SPEC.md`](SPEC.md) §9.2), which is an argument for keeping the host's fonts
+available by default.
 
 ## Q-C — Does `render_svg` get a `timeout_ms` parameter of its own?
 
@@ -69,8 +72,10 @@ single-process, single-client stdio server for as long as it likes. If a
 per-call parameter is wanted later, it should only ever be allowed to *lower*
 the operator's value, which is the same rule the path allowlist follows.
 
-**Currently in the specification:** operator configuration only, marked PENDING
-in [`SPEC.md`](SPEC.md) §7.1.
+**Currently built:** operator configuration only, marked PENDING in
+[`SPEC.md`](SPEC.md) §7.1. A tool that produces several images gets the budget
+multiplied by the number of images, so a batch is not cut off by a budget meant
+for one render.
 
 ## Q-D — Which licence?
 
@@ -85,9 +90,10 @@ which permits anything.
 matches the dependencies, imposes nothing on users, and is what anyone
 evaluating a Rust crate expects to find.
 
-**Currently in the specification:** no licence chosen; the release workflow in
-[`ARCHITECTURE.md`](ARCHITECTURE.md) §5.1 already copies a `LICENSE` file into
-the artefact if one exists.
+**Currently built:** no licence chosen, and no `LICENSE` file in the repository.
+The release workflow copies one into the artefact if it appears. This is the one
+open question that has to be answered before a first release: without a licence
+nobody may legally use this.
 
 ## Smaller points
 
@@ -96,9 +102,21 @@ the project owner may have a preference.
 
 | # | Question | Default in the specification | Note |
 | --- | --- | --- | --- |
-| S1 | Does ICNS ship in the first release? | Specified, low priority, behind a Cargo feature | No target platform consumes ICNS. It is cheap to add and easy to leave out. |
+| S1 | Does ICNS ship in the first release? | Built, behind the `icns` Cargo feature, on by default | No target platform consumes ICNS, but it cost one small module and one dependency. |
 | S2 | How is the binary distributed? | GitHub release artefacts only | Alternatives, not mutually exclusive: publish on crates.io so `cargo install` works; an npm wrapper package, which is how most MCP servers are installed today and would matter for adoption by the users of the six servers this replaces. |
-| S3 | Is `convert_image` in scope? | Yes, format conversion, Base64 and resize | It exists to absorb `image-processing-mcp`. If that is not a goal, dropping it removes a decoder surface and a whole class of input handling. |
+| S3 | Is `convert_image` in scope? | Built: format conversion, Base64 and resize | It exists to absorb `image-processing-mcp`. If that is not a goal, dropping it removes a decoder surface and a whole class of input handling. |
 | S4 | Is 64 the right cap on `render_svg_batch` entries? | 64 | Large enough for any icon set. It is a guard against a single call occupying the server for minutes, not a meaningful limit. |
 | S5 | Tool names | `render_svg`, `render_svg_batch`, `render_icon`, `probe_svg`, `optimize_svg`, `convert_image`, `get_capabilities` | Unprefixed. Clients show the server name alongside, so a prefix mostly adds noise — but a client with several image servers configured would show three `convert_image` entries. |
 | S6 | Does the server expose MCP resources or prompts? | No, tools only | A resource listing the corpus of supported features, or a prompt template for common icon-set generation, would be small additions. Neither is required by anything in [`SPEC.md`](SPEC.md). |
+
+## Reported upstream
+
+Not a question, but the natural next action and nobody's job by default.
+
+The `feDisplacementMap` defect in resvg 0.48.1 ([`SPEC.md`](SPEC.md) §9.4) is
+reproducible in four lines and has a one-line fix: `displacement_map.rs`
+multiplies by `fe.scale()` a second time although `sx` and `sy` already carry it.
+It has not been reported to
+[`linebender/resvg`](https://github.com/linebender/resvg/issues) from here.
+Filing it, and dropping the gap from the catalogue once a release carries the
+fix, is worth doing — both for this project and for everyone else using resvg.

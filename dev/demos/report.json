@@ -194,7 +194,7 @@
       "render_warnings": [],
       "render_error": null,
       "bytes": 83759,
-      "render_ms": 43,
+      "render_ms": 41,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -223,7 +223,7 @@
       "render_warnings": [],
       "render_error": null,
       "bytes": 14530,
-      "render_ms": 28,
+      "render_ms": 34,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -247,7 +247,7 @@
       "render_warnings": [],
       "render_error": null,
       "bytes": 15453,
-      "render_ms": 32,
+      "render_ms": 25,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -271,7 +271,7 @@
       "render_warnings": [],
       "render_error": null,
       "bytes": 3980,
-      "render_ms": 14,
+      "render_ms": 15,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -312,7 +312,7 @@
       ],
       "render_error": null,
       "bytes": 123,
-      "render_ms": 95,
+      "render_ms": 80,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -342,7 +342,7 @@
       "render_warnings": [],
       "render_error": null,
       "bytes": 33649,
-      "render_ms": 54,
+      "render_ms": 40,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -398,7 +398,7 @@
       "render_warnings": [],
       "render_error": null,
       "bytes": 2548,
-      "render_ms": 16,
+      "render_ms": 25,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -425,7 +425,7 @@
       "render_warnings": [],
       "render_error": null,
       "bytes": 427100,
-      "render_ms": 106,
+      "render_ms": 103,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -449,7 +449,7 @@
       "render_warnings": [],
       "render_error": null,
       "bytes": 448374,
-      "render_ms": 89,
+      "render_ms": 117,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -624,7 +624,7 @@
       ],
       "render_error": null,
       "bytes": 4080,
-      "render_ms": 0,
+      "render_ms": 1,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -767,6 +767,64 @@
       }
     },
     {
+      "name": "gaps-svg-tiny",
+      "svg": "dev/demos/svg/gaps-svg-tiny.svg",
+      "png": "dev/demos/out/gaps-svg-tiny.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [
+        {
+          "code": "svg_tiny_1_2",
+          "count": 1,
+          "element": "discard",
+          "message": "SVG Tiny 1.2 specific elements are not supported."
+        },
+        {
+          "code": "svg_tiny_1_2",
+          "count": 1,
+          "element": "textArea",
+          "message": "SVG Tiny 1.2 specific elements are not supported."
+        }
+      ],
+      "fonts_requested": [
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        }
+      ],
+      "filter_primitives": [],
+      "render_warnings": [
+        {
+          "code": "svg_tiny_1_2",
+          "detail": {
+            "count": 1,
+            "element": "discard"
+          },
+          "message": "discard (1\u00d7): SVG Tiny 1.2 specific elements are not supported."
+        },
+        {
+          "code": "svg_tiny_1_2",
+          "detail": {
+            "count": 1,
+            "element": "textArea"
+          },
+          "message": "textArea (1\u00d7): SVG Tiny 1.2 specific elements are not supported."
+        }
+      ],
+      "render_error": null,
+      "bytes": 1421,
+      "render_ms": 0,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
       "name": "gradient-linear",
       "svg": "dev/demos/svg/gradient-linear.svg",
       "png": "dev/demos/out/gradient-linear.png",
@@ -852,7 +910,7 @@
       "render_warnings": [],
       "render_error": null,
       "bytes": 2339,
-      "render_ms": 8,
+      "render_ms": 7,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -874,7 +932,7 @@
       "render_warnings": [],
       "render_error": null,
       "bytes": 5587,
-      "render_ms": 9,
+      "render_ms": 6,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -920,7 +978,7 @@
       "render_warnings": [],
       "render_error": null,
       "bytes": 164623,
-      "render_ms": 12,
+      "render_ms": 14,
       "padding_px": {
         "bottom": 0,
         "left": 0,
@@ -1099,7 +1157,7 @@
       "render_warnings": [],
       "render_error": null,
       "bytes": 7965,
-      "render_ms": 1,
+      "render_ms": 0,
       "padding_px": {
         "bottom": 0,
         "left": 0,
