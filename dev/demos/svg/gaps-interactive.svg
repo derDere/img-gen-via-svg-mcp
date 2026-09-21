@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>Interactive elements, which have no effect on a static render</title>
+  <rect width="240" height="240" fill="#edf2f4"/>
+  <a xlink:href="https://example.org">
+    <rect x="30" y="40" width="180" height="60" rx="8" fill="#2b2d42"/>
+    <text x="55" y="80" font-family="DejaVu Sans" font-size="20" fill="#edf2f4">a link</text>
+  </a>
+  <view id="v" viewBox="0 0 120 120"/>
+  <circle cx="120" cy="170" r="45" fill="#ef233c"/>
+</svg>

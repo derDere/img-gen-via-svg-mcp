@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>feDropShadow, including a coloured shadow with opacity</title>
+  <defs>
+    <filter id="ds1" x="-40%" y="-40%" width="200%" height="200%">
+      <feDropShadow dx="6" dy="6" stdDeviation="4"/>
+    </filter>
+    <filter id="ds2" x="-40%" y="-40%" width="200%" height="200%">
+      <feDropShadow dx="-8" dy="10" stdDeviation="6" flood-color="#e63946" flood-opacity="0.75"/>
+    </filter>
+  </defs>
+  <rect width="240" height="240" fill="#f8f9fa"/>
+  <rect x="35" y="30" width="80" height="80" rx="10" fill="#1d3557" filter="url(#ds1)"/>
+  <circle cx="175" cy="70" r="40" fill="#457b9d" filter="url(#ds2)"/>
+  <text x="30" y="200" font-family="DejaVu Sans" font-size="34" fill="#1d3557" filter="url(#ds1)">shadow</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>A reference that cannot be resolved</title>
+  <rect width="240" height="240" fill="#fff"/>
+  <image x="20" y="20" width="100" height="100" xlink:href="this-file-does-not-exist.png"/>
+  <circle cx="170" cy="70" r="40" fill="#06d6a0"/>
+  <text x="20" y="180" font-family="DejaVu Sans" font-size="15" fill="#111">the image above is dropped</text>
+</svg>

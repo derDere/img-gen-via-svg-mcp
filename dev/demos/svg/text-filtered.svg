@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>Text under a blur and under a mask, the interaction renderers get wrong</title>
+  <defs>
+    <filter id="tb" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter>
+    <linearGradient id="tm" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient>
+    <mask id="fade"><rect width="240" height="240" fill="url(#tm)"/></mask>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="g"/>
+      <feFlood flood-color="#00f5d4" result="c"/>
+      <feComposite in="c" in2="g" operator="in" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="240" height="240" fill="#10002b"/>
+  <text x="20" y="60" font-family="DejaVu Sans" font-size="32" fill="#e0aaff" filter="url(#tb)">blurred</text>
+  <text x="20" y="130" font-family="DejaVu Sans" font-size="32" fill="#c77dff" mask="url(#fade)">masked</text>
+  <text x="20" y="200" font-family="DejaVu Sans" font-size="32" fill="#f7f7ff" filter="url(#glow)">glowing</text>
+</svg>

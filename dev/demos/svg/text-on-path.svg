@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>Text on a path with a start offset and an explicit text length</title>
+  <defs>
+    <path id="arc" d="M20 180 A100 100 0 0 1 220 180" fill="none"/>
+    <path id="wave" d="M10 210 Q70 170 120 210 T230 210" fill="none"/>
+  </defs>
+  <rect width="240" height="240" fill="#001219"/>
+  <use xlink:href="#arc" stroke="#005f73" stroke-width="2"/>
+  <text font-family="DejaVu Sans" font-size="22" fill="#94d2bd">
+    <textPath xlink:href="#arc" startOffset="12%">curved along an arc</textPath>
+  </text>
+  <text font-family="DejaVu Sans" font-size="16" fill="#ee9b00" textLength="210" lengthAdjust="spacingAndGlyphs">
+    <textPath xlink:href="#wave">stretched to a fixed length</textPath>
+  </text>
+</svg>

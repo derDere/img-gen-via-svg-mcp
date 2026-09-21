@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang=en>
+<meta charset=utf-8>
+<title>img-gen-via-svg-mcp demo comparison</title>
+<style>
+  :root { color-scheme: light; }
+  body { font: 14px/1.5 system-ui, sans-serif; margin: 0; padding: 24px; background: #f4f4f5; color: #18181b; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .lede { margin: 0 0 24px; color: #52525b; }
+  section { background: #fff; border: 1px solid #e4e4e7; border-radius: 10px; padding: 14px; margin-bottom: 18px; }
+  h2 { font-size: 15px; margin: 0 0 10px; font-family: ui-monospace, monospace; }
+  .pair { display: flex; gap: 14px; }
+  figure { margin: 0; }
+  figcaption { font-size: 11px; color: #71717a; text-align: center; margin-top: 4px; }
+  img { width: 240px; height: 240px; display: block; border: 1px solid #e4e4e7;
+         background: repeating-conic-gradient(#e9e9ec 0% 25%, #fff 0% 50%) 50% / 16px 16px; }
+  .meta { margin-top: 10px; }
+  ul.warn { margin: 0; padding-left: 18px; color: #92400e; font-size: 12px; }
+  .clean { margin: 0; color: #15803d; font-size: 12px; }
+  .gap { margin: 0 0 4px; color: #1d4ed8; font-size: 12px; }
+  code { background: #f4f4f5; padding: 0 3px; border-radius: 3px; }
+</style>
+<h1>Demo comparison</h1>
+<p class=lede>The browser's rendering of each document, next to the PNG this server produced from it at 480&times;480.
+The chequerboard behind an image is the page, so it shows wherever the image is transparent.</p>
+
+    <section id="clip-path">
+      <h2>clip-path</h2>
+      <div class=pair>
+        <figure><img src="svg/clip-path.svg" alt="clip-path in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/clip-path.png" alt="clip-path rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="filter-blur">
+      <h2>filter-blur</h2>
+      <div class=pair>
+        <figure><img src="svg/filter-blur.svg" alt="filter-blur in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/filter-blur.png" alt="filter-blur rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="filter-chain">
+      <h2>filter-chain</h2>
+      <div class=pair>
+        <figure><img src="svg/filter-chain.svg" alt="filter-chain in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/filter-chain.png" alt="filter-chain rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="filter-colorspace">
+      <h2>filter-colorspace</h2>
+      <div class=pair>
+        <figure><img src="svg/filter-colorspace.svg" alt="filter-colorspace in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/filter-colorspace.png" alt="filter-colorspace rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="filter-convolve">
+      <h2>filter-convolve</h2>
+      <div class=pair>
+        <figure><img src="svg/filter-convolve.svg" alt="filter-convolve in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/filter-convolve.png" alt="filter-convolve rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="filter-displacement">
+      <h2>filter-displacement</h2>
+      <div class=pair>
+        <figure><img src="svg/filter-displacement.svg" alt="filter-displacement in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/filter-displacement.png" alt="filter-displacement rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=gap>1 declared gap(s)</p><ul class=warn><li><code>filter_displacement_scale</code> feDisplacementMap (1×): This renderer applies the scale twice, so scale=&quot;38&quot; displaces by about 1444 pixels instead of 38. Use scale=&quot;6.164&quot; to get the displacement this document asks for.</li></ul></div>
+    </section>
+
+    <section id="filter-dropshadow">
+      <h2>filter-dropshadow</h2>
+      <div class=pair>
+        <figure><img src="svg/filter-dropshadow.svg" alt="filter-dropshadow in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/filter-dropshadow.png" alt="filter-dropshadow rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="filter-lighting">
+      <h2>filter-lighting</h2>
+      <div class=pair>
+        <figure><img src="svg/filter-lighting.svg" alt="filter-lighting in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/filter-lighting.png" alt="filter-lighting rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="filter-morphology">
+      <h2>filter-morphology</h2>
+      <div class=pair>
+        <figure><img src="svg/filter-morphology.svg" alt="filter-morphology in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/filter-morphology.png" alt="filter-morphology rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="filter-turbulence-grain">
+      <h2>filter-turbulence-grain</h2>
+      <div class=pair>
+        <figure><img src="svg/filter-turbulence-grain.svg" alt="filter-turbulence-grain in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/filter-turbulence-grain.png" alt="filter-turbulence-grain rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="filter-turbulence-noise">
+      <h2>filter-turbulence-noise</h2>
+      <div class=pair>
+        <figure><img src="svg/filter-turbulence-noise.svg" alt="filter-turbulence-noise in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/filter-turbulence-noise.png" alt="filter-turbulence-noise rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="gaps-animation">
+      <h2>gaps-animation</h2>
+      <div class=pair>
+        <figure><img src="svg/gaps-animation.svg" alt="gaps-animation in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/gaps-animation.png" alt="gaps-animation rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=gap>3 declared gap(s)</p><ul class=warn><li><code>animation</code> animate (1×): SMIL animation is not rendered; the element&#x27;s initial state is drawn.</li><li><code>animation</code> animateTransform (1×): SMIL animation is not rendered; the element&#x27;s initial state is drawn.</li><li><code>animation</code> set (1×): SMIL animation is not rendered; the element&#x27;s initial state is drawn.</li></ul></div>
+    </section>
+
+    <section id="gaps-broken-ref">
+      <h2>gaps-broken-ref</h2>
+      <div class=pair>
+        <figure><img src="svg/gaps-broken-ref.svg" alt="gaps-broken-ref in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/gaps-broken-ref.png" alt="gaps-broken-ref rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><ul class=warn><li><code>unresolved_reference</code> Reference this-file-does-not-exist.png does not exist under /repos/img-gen-via-svg-mcp/dev/demos/svg; the element is not drawn.</li></ul></div>
+    </section>
+
+    <section id="gaps-css">
+      <h2>gaps-css</h2>
+      <div class=pair>
+        <figure><img src="svg/gaps-css.svg" alt="gaps-css in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/gaps-css.png" alt="gaps-css rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=gap>3 declared gap(s)</p><ul class=warn><li><code>css_advanced</code> @media (1×): This CSS construct is not resolved; the declarations under it do not apply.</li><li><code>css_advanced</code> @supports (1×): This CSS construct is not resolved; the declarations under it do not apply.</li><li><code>css_advanced</code> custom property (1×): This CSS construct is not resolved; the declarations under it do not apply.</li></ul></div>
+    </section>
+
+    <section id="gaps-foreignobject">
+      <h2>gaps-foreignobject</h2>
+      <div class=pair>
+        <figure><img src="svg/gaps-foreignobject.svg" alt="gaps-foreignobject in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/gaps-foreignobject.png" alt="gaps-foreignobject rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=gap>1 declared gap(s)</p><ul class=warn><li><code>foreign_object</code> foreignObject (1×): foreignObject content is not rendered.</li></ul></div>
+    </section>
+
+    <section id="gaps-interactive">
+      <h2>gaps-interactive</h2>
+      <div class=pair>
+        <figure><img src="svg/gaps-interactive.svg" alt="gaps-interactive in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/gaps-interactive.png" alt="gaps-interactive rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=gap>1 declared gap(s)</p><ul class=warn><li><code>interactive</code> view (1×): The element has no effect on a static render.</li></ul></div>
+    </section>
+
+    <section id="gaps-script">
+      <h2>gaps-script</h2>
+      <div class=pair>
+        <figure><img src="svg/gaps-script.svg" alt="gaps-script in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/gaps-script.png" alt="gaps-script rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=gap>2 declared gap(s)</p><ul class=warn><li><code>scripting</code> onclick (1×): An event attribute has no effect; the render is static.</li><li><code>scripting</code> script (1×): Script elements are ignored.</li></ul></div>
+    </section>
+
+    <section id="gradient-linear">
+      <h2>gradient-linear</h2>
+      <div class=pair>
+        <figure><img src="svg/gradient-linear.svg" alt="gradient-linear in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/gradient-linear.png" alt="gradient-linear rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="gradient-radial">
+      <h2>gradient-radial</h2>
+      <div class=pair>
+        <figure><img src="svg/gradient-radial.svg" alt="gradient-radial in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/gradient-radial.png" alt="gradient-radial rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="image-embedded">
+      <h2>image-embedded</h2>
+      <div class=pair>
+        <figure><img src="svg/image-embedded.svg" alt="image-embedded in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/image-embedded.png" alt="image-embedded rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="mask-alpha">
+      <h2>mask-alpha</h2>
+      <div class=pair>
+        <figure><img src="svg/mask-alpha.svg" alt="mask-alpha in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/mask-alpha.png" alt="mask-alpha rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="mask-luminance">
+      <h2>mask-luminance</h2>
+      <div class=pair>
+        <figure><img src="svg/mask-luminance.svg" alt="mask-luminance in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/mask-luminance.png" alt="mask-luminance rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="opacity-blend">
+      <h2>opacity-blend</h2>
+      <div class=pair>
+        <figure><img src="svg/opacity-blend.svg" alt="opacity-blend in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/opacity-blend.png" alt="opacity-blend rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="pattern">
+      <h2>pattern</h2>
+      <div class=pair>
+        <figure><img src="svg/pattern.svg" alt="pattern in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/pattern.png" alt="pattern rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="structure-use-symbol">
+      <h2>structure-use-symbol</h2>
+      <div class=pair>
+        <figure><img src="svg/structure-use-symbol.svg" alt="structure-use-symbol in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/structure-use-symbol.png" alt="structure-use-symbol rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><ul class=warn><li><code>font_substituted</code> The default font family &quot;Times New Roman&quot; is not available; &quot;FreeSans&quot; is used for text that names no family of its own.</li></ul></div>
+    </section>
+
+    <section id="text-basic">
+      <h2>text-basic</h2>
+      <div class=pair>
+        <figure><img src="svg/text-basic.svg" alt="text-basic in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/text-basic.png" alt="text-basic rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="text-filtered">
+      <h2>text-filtered</h2>
+      <div class=pair>
+        <figure><img src="svg/text-filtered.svg" alt="text-filtered in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/text-filtered.png" alt="text-filtered rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="text-missing-font">
+      <h2>text-missing-font</h2>
+      <div class=pair>
+        <figure><img src="svg/text-missing-font.svg" alt="text-missing-font in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/text-missing-font.png" alt="text-missing-font rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><ul class=warn><li><code>font_missing</code> Font family &quot;Absolutely No Such Font&quot; is not in the font database, so the text using it is not rendered.</li></ul></div>
+    </section>
+
+    <section id="text-on-path">
+      <h2>text-on-path</h2>
+      <div class=pair>
+        <figure><img src="svg/text-on-path.svg" alt="text-on-path in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/text-on-path.png" alt="text-on-path rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><p class=clean>no warnings</p></div>
+    </section>
+
+    <section id="viewbox-aspect">
+      <h2>viewbox-aspect</h2>
+      <div class=pair>
+        <figure><img src="svg/viewbox-aspect.svg" alt="viewbox-aspect in the browser"><figcaption>browser</figcaption></figure>
+        <figure><img src="out/viewbox-aspect.png" alt="viewbox-aspect rendered by the server"><figcaption>img-gen-via-svg-mcp</figcaption></figure>
+      </div>
+      <div class=meta><ul class=warn><li><code>aspect_adjusted</code> The document&#x27;s aspect ratio 1.2500 differs from the requested 1.0000; fit contain was applied.</li></ul></div>
+    </section>
+</html>

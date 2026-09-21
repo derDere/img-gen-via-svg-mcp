@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>SMIL animation, which is not rendered</title>
+  <rect width="240" height="240" fill="#fff"/>
+  <rect x="20" y="20" width="60" height="60" fill="#e63946">
+    <animate attributeName="x" from="20" to="160" dur="2s" repeatCount="indefinite"/>
+  </rect>
+  <circle cx="120" cy="150" r="30" fill="#457b9d">
+    <animateTransform attributeName="transform" type="rotate" from="0 120 150" to="360 120 150" dur="3s"/>
+  </circle>
+  <rect x="180" y="180" width="40" height="40" fill="#2a9d8f">
+    <set attributeName="fill" to="#000" begin="1s"/>
+  </rect>
+</svg>

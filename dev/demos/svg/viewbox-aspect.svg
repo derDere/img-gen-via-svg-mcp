@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="80" viewBox="0 0 100 80">
+  <title>A 100x80 document, the fixture for the fit strategies</title>
+  <rect width="100" height="80" fill="#22223b"/>
+  <circle cx="50" cy="40" r="32" fill="#f2e9e4"/>
+  <rect x="2" y="2" width="96" height="76" fill="none" stroke="#c9ada7" stroke-width="3"/>
+  <path d="M0 0 L100 80 M100 0 L0 80" stroke="#9a8c98" stroke-width="2"/>
+</svg>

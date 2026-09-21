@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>foreignObject, which needs a browser engine</title>
+  <rect width="240" height="240" fill="#f1faee"/>
+  <circle cx="120" cy="60" r="40" fill="#1d3557"/>
+  <foreignObject x="20" y="120" width="200" height="100">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font:16px sans-serif;color:#e63946">HTML inside an SVG</div>
+  </foreignObject>
+</svg>

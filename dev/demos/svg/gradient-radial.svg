@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>Radial gradients with focal points, and a gradient on a stroke</title>
+  <defs>
+    <radialGradient id="r1" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#1a1a2e"/></radialGradient>
+    <radialGradient id="r2" cx="0.5" cy="0.5" r="0.5" fx="0.25" fy="0.25"><stop offset="0" stop-color="#ffd60a"/><stop offset="1" stop-color="#003566"/></radialGradient>
+    <radialGradient id="r3" spreadMethod="repeat" r="0.18"><stop offset="0" stop-color="#e63946"/><stop offset="1" stop-color="#a8dadc"/></radialGradient>
+  </defs>
+  <rect width="240" height="240" fill="#0b132b"/>
+  <circle cx="65" cy="65" r="50" fill="url(#r1)"/>
+  <circle cx="175" cy="65" r="50" fill="url(#r2)"/>
+  <rect x="20" y="135" width="200" height="85" fill="none" stroke="url(#r3)" stroke-width="22"/>
+</svg>

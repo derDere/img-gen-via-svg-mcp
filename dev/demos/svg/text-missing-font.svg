@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>A font family that is deliberately not installed</title>
+  <rect width="240" height="240" fill="#fff"/>
+  <text x="20" y="80" font-family="Absolutely No Such Font" font-size="26" fill="#111">substituted</text>
+  <text x="20" y="150" font-family="DejaVu Sans" font-size="26" fill="#111">available</text>
+</svg>

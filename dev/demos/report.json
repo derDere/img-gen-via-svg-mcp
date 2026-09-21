@@ -1,0 +1,1150 @@
+{
+  "capabilities": {
+    "architecture": "x86_64",
+    "config": {
+      "allowed_input_dirs": [],
+      "allowed_output_dirs": [],
+      "default_fit": "contain",
+      "default_size": "100x100",
+      "follow_symlinks": false,
+      "max_inline_bytes": 5242880,
+      "max_pixels": 100000000,
+      "remote_input": false,
+      "remote_svg_references": false,
+      "render_timeout_ms": 30000
+    },
+    "encoder": {
+      "name": "image",
+      "version": "0.25"
+    },
+    "fonts": {
+      "face_count": 20,
+      "families": [
+        "DejaVu Sans",
+        "DejaVu Sans Mono",
+        "DejaVu Serif",
+        "Liberation Mono",
+        "Liberation Sans",
+        "Liberation Serif"
+      ],
+      "generic_families": {
+        "cursive": "IranNastaliq",
+        "fantasy": "Homa",
+        "monospace": "FreeMono",
+        "sans_serif": "FreeSans",
+        "serif": "FreeSerif"
+      },
+      "system_fonts_loaded": true
+    },
+    "formats": {
+      "encode": [
+        "png",
+        "jpeg",
+        "bmp",
+        "gif",
+        "tiff",
+        "webp",
+        "ico",
+        "tga",
+        "qoi",
+        "pnm",
+        "farbfeld",
+        "openexr",
+        "hdr"
+      ],
+      "encode_containers": [
+        "ico",
+        "png_set",
+        "icns"
+      ],
+      "notes": {
+        "avif": "not built into this binary",
+        "gif": "at most 256 colours, alpha reduced to fully transparent or fully opaque",
+        "ico": "each image at most 256\u00d7256",
+        "tiff": "written with the encoder's default compression",
+        "webp": "lossless encoding only"
+      }
+    },
+    "platform": "linux",
+    "renderer": {
+      "name": "resvg",
+      "version": "0.48"
+    },
+    "server_version": "0.1.0",
+    "svg_support": {
+      "filter_primitives": [
+        "feBlend",
+        "feColorMatrix",
+        "feComponentTransfer",
+        "feComposite",
+        "feConvolveMatrix",
+        "feDiffuseLighting",
+        "feDisplacementMap",
+        "feDropShadow",
+        "feFlood",
+        "feGaussianBlur",
+        "feImage",
+        "feMerge",
+        "feMorphology",
+        "feOffset",
+        "feSpecularLighting",
+        "feTile",
+        "feTurbulence"
+      ],
+      "known_gaps": [
+        {
+          "code": "animation",
+          "description": "SMIL animation is not rendered; the element's initial state is drawn."
+        },
+        {
+          "code": "scripting",
+          "description": "script elements and event attributes are ignored."
+        },
+        {
+          "code": "interactive",
+          "description": "a renders its children; view and cursor have no effect."
+        },
+        {
+          "code": "css_advanced",
+          "description": "Only a subset of CSS is resolved; @media, @supports, @layer and custom properties are not."
+        },
+        {
+          "code": "svg_tiny_1_2",
+          "description": "SVG Tiny 1.2 specific elements are not supported."
+        },
+        {
+          "code": "foreign_object",
+          "description": "foreignObject content is not rendered."
+        },
+        {
+          "code": "filter_unsupported",
+          "description": "An unresolvable filter drops its element, as the SVG specification requires."
+        },
+        {
+          "code": "font_missing",
+          "description": "Text whose font family is not in the database is not rendered at all; the renderer does not fall back to another family for it."
+        },
+        {
+          "code": "font_substituted",
+          "description": "Text that names no family of its own is drawn in the default family, and when that one is absent too, in an available one."
+        },
+        {
+          "code": "unresolved_reference",
+          "description": "A referenced file or URL that cannot be resolved drops its element."
+        },
+        {
+          "code": "filter_displacement_scale",
+          "description": "feDisplacementMap's scale is applied twice by this renderer, so a document asking for N is displaced by about N squared."
+        },
+        {
+          "code": "parser_diagnostic",
+          "description": "The parser reported something it could not resolve; the message is passed through verbatim."
+        }
+      ],
+      "profile": "static SVG 1.1, partial SVG 2"
+    },
+    "transports": [
+      "stdio"
+    ],
+    "_is_error": false,
+    "_text": "13 encodable formats, 17 filter primitives, 12 known gaps, 20 font faces loaded."
+  },
+  "documents": [
+    {
+      "name": "clip-path",
+      "svg": "dev/demos/svg/clip-path.svg",
+      "png": "dev/demos/out/clip-path.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 2983,
+      "render_ms": 10,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "filter-blur",
+      "svg": "dev/demos/svg/filter-blur.svg",
+      "png": "dev/demos/out/filter-blur.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        }
+      ],
+      "filter_primitives": [
+        "feGaussianBlur"
+      ],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 83759,
+      "render_ms": 43,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "filter-chain",
+      "svg": "dev/demos/svg/filter-chain.svg",
+      "png": "dev/demos/out/filter-chain.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [
+        "feColorMatrix",
+        "feComposite",
+        "feFlood",
+        "feGaussianBlur",
+        "feMerge",
+        "feOffset"
+      ],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 14530,
+      "render_ms": 28,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "filter-colorspace",
+      "svg": "dev/demos/svg/filter-colorspace.svg",
+      "png": "dev/demos/out/filter-colorspace.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [
+        "feGaussianBlur"
+      ],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 15453,
+      "render_ms": 32,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "filter-convolve",
+      "svg": "dev/demos/svg/filter-convolve.svg",
+      "png": "dev/demos/out/filter-convolve.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [
+        "feConvolveMatrix"
+      ],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 3980,
+      "render_ms": 14,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "filter-displacement",
+      "svg": "dev/demos/svg/filter-displacement.svg",
+      "png": "dev/demos/out/filter-displacement.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [
+        {
+          "code": "filter_displacement_scale",
+          "count": 1,
+          "element": "feDisplacementMap",
+          "message": "This renderer applies the scale twice, so scale=\"38\" displaces by about 1444 pixels instead of 38. Use scale=\"6.164\" to get the displacement this document asks for."
+        }
+      ],
+      "fonts_requested": [],
+      "filter_primitives": [
+        "feDisplacementMap",
+        "feTurbulence"
+      ],
+      "render_warnings": [
+        {
+          "code": "filter_displacement_scale",
+          "detail": {
+            "count": 1,
+            "element": "feDisplacementMap"
+          },
+          "message": "feDisplacementMap (1\u00d7): This renderer applies the scale twice, so scale=\"38\" displaces by about 1444 pixels instead of 38. Use scale=\"6.164\" to get the displacement this document asks for."
+        }
+      ],
+      "render_error": null,
+      "bytes": 123,
+      "render_ms": 95,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "filter-dropshadow",
+      "svg": "dev/demos/svg/filter-dropshadow.svg",
+      "png": "dev/demos/out/filter-dropshadow.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        }
+      ],
+      "filter_primitives": [
+        "feDropShadow"
+      ],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 33649,
+      "render_ms": 54,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "filter-lighting",
+      "svg": "dev/demos/svg/filter-lighting.svg",
+      "png": "dev/demos/out/filter-lighting.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [
+        "feDiffuseLighting",
+        "feGaussianBlur",
+        "feSpecularLighting"
+      ],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 57300,
+      "render_ms": 23,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "filter-morphology",
+      "svg": "dev/demos/svg/filter-morphology.svg",
+      "png": "dev/demos/out/filter-morphology.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        }
+      ],
+      "filter_primitives": [
+        "feMorphology"
+      ],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 2548,
+      "render_ms": 16,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "filter-turbulence-grain",
+      "svg": "dev/demos/svg/filter-turbulence-grain.svg",
+      "png": "dev/demos/out/filter-turbulence-grain.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [
+        "feColorMatrix",
+        "feComponentTransfer",
+        "feComposite",
+        "feTurbulence"
+      ],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 427100,
+      "render_ms": 106,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "filter-turbulence-noise",
+      "svg": "dev/demos/svg/filter-turbulence-noise.svg",
+      "png": "dev/demos/out/filter-turbulence-noise.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [
+        "feTurbulence"
+      ],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 448374,
+      "render_ms": 89,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "gaps-animation",
+      "svg": "dev/demos/svg/gaps-animation.svg",
+      "png": "dev/demos/out/gaps-animation.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [
+        {
+          "code": "animation",
+          "count": 1,
+          "element": "animate",
+          "message": "SMIL animation is not rendered; the element's initial state is drawn."
+        },
+        {
+          "code": "animation",
+          "count": 1,
+          "element": "animateTransform",
+          "message": "SMIL animation is not rendered; the element's initial state is drawn."
+        },
+        {
+          "code": "animation",
+          "count": 1,
+          "element": "set",
+          "message": "SMIL animation is not rendered; the element's initial state is drawn."
+        }
+      ],
+      "fonts_requested": [],
+      "filter_primitives": [],
+      "render_warnings": [
+        {
+          "code": "animation",
+          "detail": {
+            "count": 1,
+            "element": "animate"
+          },
+          "message": "animate (1\u00d7): SMIL animation is not rendered; the element's initial state is drawn."
+        },
+        {
+          "code": "animation",
+          "detail": {
+            "count": 1,
+            "element": "animateTransform"
+          },
+          "message": "animateTransform (1\u00d7): SMIL animation is not rendered; the element's initial state is drawn."
+        },
+        {
+          "code": "animation",
+          "detail": {
+            "count": 1,
+            "element": "set"
+          },
+          "message": "set (1\u00d7): SMIL animation is not rendered; the element's initial state is drawn."
+        }
+      ],
+      "render_error": null,
+      "bytes": 1581,
+      "render_ms": 0,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "gaps-broken-ref",
+      "svg": "dev/demos/svg/gaps-broken-ref.svg",
+      "png": "dev/demos/out/gaps-broken-ref.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        }
+      ],
+      "filter_primitives": [],
+      "render_warnings": [
+        {
+          "code": "unresolved_reference",
+          "detail": {
+            "element": "image",
+            "href": "this-file-does-not-exist.png"
+          },
+          "message": "Reference this-file-does-not-exist.png does not exist under /repos/img-gen-via-svg-mcp/dev/demos/svg; the element is not drawn."
+        }
+      ],
+      "render_error": null,
+      "bytes": 3396,
+      "render_ms": 0,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "gaps-css",
+      "svg": "dev/demos/svg/gaps-css.svg",
+      "png": "dev/demos/out/gaps-css.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [
+        {
+          "code": "css_advanced",
+          "count": 1,
+          "element": "@media",
+          "message": "This CSS construct is not resolved; the declarations under it do not apply."
+        },
+        {
+          "code": "css_advanced",
+          "count": 1,
+          "element": "@supports",
+          "message": "This CSS construct is not resolved; the declarations under it do not apply."
+        },
+        {
+          "code": "css_advanced",
+          "count": 1,
+          "element": "custom property",
+          "message": "This CSS construct is not resolved; the declarations under it do not apply."
+        }
+      ],
+      "fonts_requested": [
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        }
+      ],
+      "filter_primitives": [],
+      "render_warnings": [
+        {
+          "code": "css_advanced",
+          "detail": {
+            "count": 1,
+            "element": "@media"
+          },
+          "message": "@media (1\u00d7): This CSS construct is not resolved; the declarations under it do not apply."
+        },
+        {
+          "code": "css_advanced",
+          "detail": {
+            "count": 1,
+            "element": "@supports"
+          },
+          "message": "@supports (1\u00d7): This CSS construct is not resolved; the declarations under it do not apply."
+        },
+        {
+          "code": "css_advanced",
+          "detail": {
+            "count": 1,
+            "element": "custom property"
+          },
+          "message": "custom property (1\u00d7): This CSS construct is not resolved; the declarations under it do not apply."
+        }
+      ],
+      "render_error": null,
+      "bytes": 4080,
+      "render_ms": 0,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "gaps-foreignobject",
+      "svg": "dev/demos/svg/gaps-foreignobject.svg",
+      "png": "dev/demos/out/gaps-foreignobject.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [
+        {
+          "code": "foreign_object",
+          "count": 1,
+          "element": "foreignObject",
+          "message": "foreignObject content is not rendered."
+        }
+      ],
+      "fonts_requested": [],
+      "filter_primitives": [],
+      "render_warnings": [
+        {
+          "code": "foreign_object",
+          "detail": {
+            "count": 1,
+            "element": "foreignObject"
+          },
+          "message": "foreignObject (1\u00d7): foreignObject content is not rendered."
+        }
+      ],
+      "render_error": null,
+      "bytes": 1311,
+      "render_ms": 0,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "gaps-interactive",
+      "svg": "dev/demos/svg/gaps-interactive.svg",
+      "png": "dev/demos/out/gaps-interactive.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [
+        {
+          "code": "interactive",
+          "count": 1,
+          "element": "view",
+          "message": "The element has no effect on a static render."
+        }
+      ],
+      "fonts_requested": [
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        }
+      ],
+      "filter_primitives": [],
+      "render_warnings": [
+        {
+          "code": "interactive",
+          "detail": {
+            "count": 1,
+            "element": "view"
+          },
+          "message": "view (1\u00d7): The element has no effect on a static render."
+        }
+      ],
+      "render_error": null,
+      "bytes": 2491,
+      "render_ms": 0,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "gaps-script",
+      "svg": "dev/demos/svg/gaps-script.svg",
+      "png": "dev/demos/out/gaps-script.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [
+        {
+          "code": "scripting",
+          "count": 1,
+          "element": "onclick",
+          "message": "An event attribute has no effect; the render is static."
+        },
+        {
+          "code": "scripting",
+          "count": 1,
+          "element": "script",
+          "message": "Script elements are ignored."
+        }
+      ],
+      "fonts_requested": [],
+      "filter_primitives": [],
+      "render_warnings": [
+        {
+          "code": "scripting",
+          "detail": {
+            "count": 1,
+            "element": "onclick"
+          },
+          "message": "onclick (1\u00d7): An event attribute has no effect; the render is static."
+        },
+        {
+          "code": "scripting",
+          "detail": {
+            "count": 1,
+            "element": "script"
+          },
+          "message": "script (1\u00d7): Script elements are ignored."
+        }
+      ],
+      "render_error": null,
+      "bytes": 2073,
+      "render_ms": 0,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "gradient-linear",
+      "svg": "dev/demos/svg/gradient-linear.svg",
+      "png": "dev/demos/out/gradient-linear.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 3455,
+      "render_ms": 1,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "gradient-radial",
+      "svg": "dev/demos/svg/gradient-radial.svg",
+      "png": "dev/demos/out/gradient-radial.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 42274,
+      "render_ms": 1,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "image-embedded",
+      "svg": "dev/demos/svg/image-embedded.svg",
+      "png": "dev/demos/out/image-embedded.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        }
+      ],
+      "filter_primitives": [],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 27527,
+      "render_ms": 2,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "mask-alpha",
+      "svg": "dev/demos/svg/mask-alpha.svg",
+      "png": "dev/demos/out/mask-alpha.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 2339,
+      "render_ms": 8,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "mask-luminance",
+      "svg": "dev/demos/svg/mask-luminance.svg",
+      "png": "dev/demos/out/mask-luminance.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 5587,
+      "render_ms": 9,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "opacity-blend",
+      "svg": "dev/demos/svg/opacity-blend.svg",
+      "png": "dev/demos/out/opacity-blend.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 3956,
+      "render_ms": 2,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "pattern",
+      "svg": "dev/demos/svg/pattern.svg",
+      "png": "dev/demos/out/pattern.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [
+        "feGaussianBlur"
+      ],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 164623,
+      "render_ms": 12,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "structure-use-symbol",
+      "svg": "dev/demos/svg/structure-use-symbol.svg",
+      "png": "dev/demos/out/structure-use-symbol.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        }
+      ],
+      "filter_primitives": [],
+      "render_warnings": [
+        {
+          "code": "font_substituted",
+          "detail": {
+            "requested": "Times New Roman",
+            "used": "FreeSans"
+          },
+          "message": "The default font family \"Times New Roman\" is not available; \"FreeSans\" is used for text that names no family of its own."
+        }
+      ],
+      "render_error": null,
+      "bytes": 6503,
+      "render_ms": 2,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "text-basic",
+      "svg": "dev/demos/svg/text-basic.svg",
+      "png": "dev/demos/out/text-basic.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        },
+        {
+          "family": "DejaVu Sans Mono",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans Mono"
+        },
+        {
+          "family": "DejaVu Serif",
+          "resolved": true,
+          "resolved_to": "DejaVu Serif"
+        }
+      ],
+      "filter_primitives": [],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 7939,
+      "render_ms": 1,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "text-filtered",
+      "svg": "dev/demos/svg/text-filtered.svg",
+      "png": "dev/demos/out/text-filtered.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        }
+      ],
+      "filter_primitives": [
+        "feComposite",
+        "feFlood",
+        "feGaussianBlur",
+        "feMerge"
+      ],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 32936,
+      "render_ms": 16,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "text-missing-font",
+      "svg": "dev/demos/svg/text-missing-font.svg",
+      "png": "dev/demos/out/text-missing-font.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [
+        {
+          "family": "Absolutely No Such Font",
+          "resolved": false,
+          "resolved_to": "FreeSans"
+        },
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        }
+      ],
+      "filter_primitives": [],
+      "render_warnings": [
+        {
+          "code": "font_missing",
+          "detail": {
+            "consequence": "text_not_rendered",
+            "remedy": "Supply the font through fonts.extra_dirs or fonts.extra_files, or change the document's font-family.",
+            "requested": "Absolutely No Such Font"
+          },
+          "message": "Font family \"Absolutely No Such Font\" is not in the font database, so the text using it is not rendered."
+        }
+      ],
+      "render_error": null,
+      "bytes": 1723,
+      "render_ms": 0,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "text-on-path",
+      "svg": "dev/demos/svg/text-on-path.svg",
+      "png": "dev/demos/out/text-on-path.png",
+      "intrinsic": {
+        "height": 240.0,
+        "width": 240.0
+      },
+      "unsupported": [],
+      "fonts_requested": [
+        {
+          "family": "DejaVu Sans",
+          "resolved": true,
+          "resolved_to": "DejaVu Sans"
+        }
+      ],
+      "filter_primitives": [],
+      "render_warnings": [],
+      "render_error": null,
+      "bytes": 7965,
+      "render_ms": 1,
+      "padding_px": {
+        "bottom": 0,
+        "left": 0,
+        "right": 0,
+        "top": 0
+      }
+    },
+    {
+      "name": "viewbox-aspect",
+      "svg": "dev/demos/svg/viewbox-aspect.svg",
+      "png": "dev/demos/out/viewbox-aspect.png",
+      "intrinsic": {
+        "height": 80.0,
+        "width": 100.0
+      },
+      "unsupported": [],
+      "fonts_requested": [],
+      "filter_primitives": [],
+      "render_warnings": [
+        {
+          "code": "aspect_adjusted",
+          "detail": {
+            "padding_fill": "transparent",
+            "padding_px": {
+              "bottom": 48,
+              "left": 0,
+              "right": 0,
+              "top": 48
+            },
+            "requested_ratio": 1.0,
+            "source_ratio": 1.25,
+            "strategy": "contain"
+          },
+          "message": "The document's aspect ratio 1.2500 differs from the requested 1.0000; fit contain was applied."
+        }
+      ],
+      "render_error": null,
+      "bytes": 5182,
+      "render_ms": 0,
+      "padding_px": {
+        "bottom": 48,
+        "left": 0,
+        "right": 0,
+        "top": 48
+      }
+    }
+  ]
+}

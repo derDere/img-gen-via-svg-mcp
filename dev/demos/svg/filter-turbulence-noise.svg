@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>feTurbulence turbulence type with several octaves and a fixed seed</title>
+  <defs>
+    <filter id="n1" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="turbulence" baseFrequency="0.035" numOctaves="3" seed="42"/>
+    </filter>
+    <filter id="n2" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="turbulence" baseFrequency="0.013 0.09" numOctaves="5" seed="11"/>
+    </filter>
+  </defs>
+  <rect x="0" y="0" width="240" height="120" filter="url(#n1)"/>
+  <rect x="0" y="120" width="240" height="120" filter="url(#n2)"/>
+</svg>

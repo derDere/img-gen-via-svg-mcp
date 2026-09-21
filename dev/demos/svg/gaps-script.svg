@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>A script element and an event attribute, both ignored</title>
+  <rect width="240" height="240" fill="#fefae0"/>
+  <script type="application/ecmascript">document.title = "changed";</script>
+  <circle cx="120" cy="120" r="70" fill="#bc6c25" onclick="alert(1)"/>
+</svg>

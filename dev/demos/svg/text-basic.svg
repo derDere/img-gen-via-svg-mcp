@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>Text with tspan offsets, rotation and letter spacing</title>
+  <rect width="240" height="240" fill="#fffdf7"/>
+  <text x="20" y="45" font-family="DejaVu Sans" font-size="28" fill="#22223b">Hamburg</text>
+  <text x="20" y="90" font-family="DejaVu Serif" font-size="24" fill="#9a031e">
+    <tspan>Serif</tspan><tspan dx="10" dy="8" fill="#5f0f40">shifted</tspan>
+  </text>
+  <text x="20" y="140" font-family="DejaVu Sans Mono" font-size="20" letter-spacing="4" fill="#0f4c5c">mono 0123</text>
+  <text x="20" y="190" font-family="DejaVu Sans" font-size="26" fill="#3d348b" word-spacing="12">word spacing</text>
+  <text x="20" y="225" font-family="DejaVu Sans" font-size="22" fill="#e36414">
+    <tspan rotate="0 12 24 36 48">rotate</tspan>
+  </text>
+</svg>

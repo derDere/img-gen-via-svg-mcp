@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>Linear gradients with every spread method and a gradientTransform</title>
+  <defs>
+    <linearGradient id="pad" x1="0.35" y1="0" x2="0.65" y2="0"><stop offset="0" stop-color="#8338ec"/><stop offset="1" stop-color="#ffbe0b"/></linearGradient>
+    <linearGradient id="reflect" x1="0.4" y1="0" x2="0.6" y2="0" spreadMethod="reflect"><stop offset="0" stop-color="#3a86ff"/><stop offset="1" stop-color="#fb5607"/></linearGradient>
+    <linearGradient id="repeat" x1="0.4" y1="0" x2="0.6" y2="0" spreadMethod="repeat"><stop offset="0" stop-color="#06d6a0"/><stop offset="1" stop-color="#073b4c"/></linearGradient>
+    <linearGradient id="rot" gradientTransform="rotate(45 0.5 0.5)"><stop offset="0" stop-color="#ff006e"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+  </defs>
+  <rect x="0" y="0" width="240" height="60" fill="url(#pad)"/>
+  <rect x="0" y="60" width="240" height="60" fill="url(#reflect)"/>
+  <rect x="0" y="120" width="240" height="60" fill="url(#repeat)"/>
+  <rect x="0" y="180" width="240" height="60" fill="url(#rot)"/>
+</svg>

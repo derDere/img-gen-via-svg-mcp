@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>SVG Tiny 1.2 elements, which are not supported</title>
+  <rect width="240" height="240" fill="#f0efeb"/>
+  <circle cx="120" cy="70" r="45" fill="#8d99ae"/>
+  <textArea x="20" y="140" width="200" height="80" font-family="DejaVu Sans" font-size="16">
+    A textArea is an SVG Tiny 1.2 element and is not drawn.
+  </textArea>
+  <discard begin="5s"/>
+</svg>

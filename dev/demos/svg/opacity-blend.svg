@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>Group opacity, element opacity and CSS blend modes</title>
+  <rect width="240" height="240" fill="#ffffff"/>
+  <rect x="0" y="0" width="240" height="120" fill="#ffd166"/>
+  <rect x="0" y="120" width="240" height="120" fill="#118ab2"/>
+  <g opacity="0.85" isolation="isolate">
+    <circle cx="70" cy="70" r="45" fill="#ef476f" style="mix-blend-mode:multiply"/>
+    <circle cx="120" cy="70" r="45" fill="#06d6a0" style="mix-blend-mode:screen"/>
+    <circle cx="170" cy="70" r="45" fill="#073b4c" style="mix-blend-mode:overlay"/>
+  </g>
+  <g>
+    <rect x="30" y="140" width="80" height="80" fill="#ef476f" opacity="0.5"/>
+    <rect x="80" y="165" width="80" height="80" fill="#06d6a0" style="mix-blend-mode:difference"/>
+    <rect x="140" y="140" width="80" height="80" fill="#ffd166" style="mix-blend-mode:hard-light"/>
+  </g>
+</svg>

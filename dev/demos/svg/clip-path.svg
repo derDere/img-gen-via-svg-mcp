@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>Nested clip paths with an even-odd clip rule</title>
+  <defs>
+    <clipPath id="star">
+      <path d="M120 15 L149 96 L235 96 L166 146 L192 228 L120 178 L48 228 L74 146 L5 96 L91 96 Z" clip-rule="evenodd"/>
+    </clipPath>
+    <clipPath id="band"><rect x="0" y="60" width="240" height="130"/></clipPath>
+  </defs>
+  <rect width="240" height="240" fill="#e9ecef"/>
+  <g clip-path="url(#star)">
+    <g clip-path="url(#band)">
+      <rect width="240" height="240" fill="#4361ee"/>
+      <circle cx="120" cy="120" r="60" fill="#f72585"/>
+    </g>
+  </g>
+</svg>

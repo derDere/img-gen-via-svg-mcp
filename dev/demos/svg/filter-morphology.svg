@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>feMorphology erode and dilate</title>
+  <defs>
+    <filter id="dilate"><feMorphology operator="dilate" radius="4"/></filter>
+    <filter id="erode"><feMorphology operator="erode" radius="2"/></filter>
+  </defs>
+  <rect width="240" height="240" fill="#fdf6e3"/>
+  <g font-family="DejaVu Sans" font-size="40" fill="#073642">
+    <text x="20" y="60">plain</text>
+    <text x="20" y="130" filter="url(#dilate)">dilate</text>
+    <text x="20" y="200" filter="url(#erode)">erode</text>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>feGaussianBlur at three radii, on a shape, a group and text</title>
+  <defs>
+    <filter id="b2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="b6" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    <filter id="b12" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+  </defs>
+  <rect width="240" height="240" fill="#101418"/>
+  <circle cx="45" cy="55" r="28" fill="#4ea1ff" filter="url(#b2)"/>
+  <circle cx="120" cy="55" r="28" fill="#4ea1ff" filter="url(#b6)"/>
+  <circle cx="195" cy="55" r="28" fill="#4ea1ff" filter="url(#b12)"/>
+  <g filter="url(#b6)">
+    <rect x="30" y="110" width="60" height="45" fill="#ff8a3d"/>
+    <rect x="60" y="130" width="60" height="45" fill="#ffd166" opacity="0.8"/>
+  </g>
+  <text x="140" y="145" font-family="DejaVu Sans" font-size="26" fill="#e6f1ff" filter="url(#b2)">blur</text>
+  <rect x="20" y="190" width="200" height="30" fill="#2ec4b6" filter="url(#b12)"/>
+</svg>

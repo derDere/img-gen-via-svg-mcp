@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>An embedded raster image at both image-rendering settings</title>
+  <rect width="240" height="240" fill="#ced4da"/>
+  <image x="15" y="30" width="100" height="100" image-rendering="optimizeQuality"
+     xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAT0lEQVR42gFEALv/AOY5Rv/x+u7/qNrc/0V7nf8A8fru/x01V//mOUagqNrc/wS34O4AyQTvADf8EV/UIBIAAEV7nf+o2tz/8fru/+Y5Rv+2NCm7whJQggAAAABJRU5ErkJggg=="/>
+  <image x="125" y="30" width="100" height="100" image-rendering="optimizeSpeed"
+     xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAT0lEQVR42gFEALv/AOY5Rv/x+u7/qNrc/0V7nf8A8fru/x01V//mOUagqNrc/wS34O4AyQTvADf8EV/UIBIAAEV7nf+o2tz/8fru/+Y5Rv+2NCm7whJQggAAAABJRU5ErkJggg=="/>
+  <text x="20" y="180" font-family="DejaVu Sans" font-size="16" fill="#212529">left: smooth, right: nearest</text>
+</svg>

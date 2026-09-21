@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>A chain of primitives with named results, feMerge and feTile</title>
+  <defs>
+    <filter id="chain" x="-20%" y="-20%" width="140%" height="140%">
+      <feFlood flood-color="#00b4d8" flood-opacity="0.9" result="flood"/>
+      <feComposite in="flood" in2="SourceAlpha" operator="in" result="tinted"/>
+      <feGaussianBlur in="tinted" stdDeviation="5" result="soft"/>
+      <feOffset in="soft" dx="8" dy="8" result="shifted"/>
+      <feColorMatrix in="shifted" type="hueRotate" values="90" result="rotated"/>
+      <feMerge>
+        <feMergeNode in="rotated"/>
+        <feMergeNode in="soft"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="240" height="240" fill="#03071e"/>
+  <g filter="url(#chain)">
+    <path d="M120 40 L190 190 L50 190 Z" fill="#ffba08"/>
+    <circle cx="120" cy="150" r="24" fill="#d00000"/>
+  </g>
+</svg>

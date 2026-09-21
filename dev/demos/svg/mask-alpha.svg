@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>An alpha mask, and a mask nested inside another</title>
+  <defs>
+    <mask id="inner" maskContentUnits="userSpaceOnUse">
+      <circle cx="120" cy="120" r="80" fill="#fff"/>
+    </mask>
+    <mask id="outer" style="mask-type:alpha" maskContentUnits="userSpaceOnUse">
+      <rect x="40" y="0" width="160" height="240" fill="#000" fill-opacity="0.85" mask="url(#inner)"/>
+    </mask>
+  </defs>
+  <rect width="240" height="240" fill="#1b1b1e"/>
+  <rect width="240" height="240" fill="#ff5d8f" mask="url(#outer)"/>
+</svg>

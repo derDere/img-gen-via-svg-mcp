@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="240" height="240" viewBox="0 0 240 240">
+  <title>feDiffuseLighting and feSpecularLighting with all three light sources</title>
+  <defs>
+    <filter id="diffuse-distant">
+      <feGaussianBlur stdDeviation="4" result="bump"/>
+      <feDiffuseLighting in="bump" surfaceScale="6" diffuseConstant="1" lighting-color="#ffe8b0">
+        <feDistantLight azimuth="235" elevation="45"/>
+      </feDiffuseLighting>
+    </filter>
+    <filter id="specular-point">
+      <feGaussianBlur stdDeviation="4" result="bump"/>
+      <feSpecularLighting in="bump" surfaceScale="6" specularConstant="1.4" specularExponent="22" lighting-color="#bde0fe">
+        <fePointLight x="60" y="40" z="80"/>
+      </feSpecularLighting>
+    </filter>
+    <filter id="specular-spot">
+      <feGaussianBlur stdDeviation="4" result="bump"/>
+      <feSpecularLighting in="bump" surfaceScale="8" specularConstant="1.2" specularExponent="18" lighting-color="#ffc8dd">
+        <feSpotLight x="120" y="20" z="90" pointsAtX="120" pointsAtY="200" pointsAtZ="0" specularExponent="6" limitingConeAngle="40"/>
+      </feSpecularLighting>
+    </filter>
+  </defs>
+  <rect width="240" height="240" fill="#14161a"/>
+  <circle cx="60" cy="60" r="40" fill="#fff" filter="url(#diffuse-distant)"/>
+  <circle cx="175" cy="60" r="40" fill="#fff" filter="url(#specular-point)"/>
+  <rect x="45" y="135" width="150" height="80" rx="18" fill="#fff" filter="url(#specular-spot)"/>
+</svg>
