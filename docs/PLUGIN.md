@@ -82,6 +82,27 @@ The server's own configuration — the path allowlist, the pixel limits, the fon
 directories — is in [`SPEC.md`](SPEC.md) §7 and is set in the `env` block of the
 client's own configuration.
 
+## The catalog entry
+
+The entry in `derDere/MyClaudeMarked` names the repository over HTTPS:
+
+```json
+{
+  "name": "img-gen-via-svg",
+  "description": "...",
+  "source": {
+    "source": "url",
+    "url": "https://github.com/derDere/img-gen-via-svg-mcp.git",
+    "ref": "main"
+  }
+}
+```
+
+The `url` shape is deliberate. A `{"source": "github", "repo": "..."}` entry
+validates and the catalog itself clones over HTTPS, but installing a plugin from
+such an entry clones the plugin repository over SSH, which fails on a machine
+that authenticates to GitHub through a Git credential helper and has no SSH key.
+
 ## What a user on an empty machine has to do
 
 **Once a release is published:** nothing beyond the two `/plugin` commands. The
