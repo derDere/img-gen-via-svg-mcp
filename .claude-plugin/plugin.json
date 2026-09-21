@@ -1,0 +1,6 @@
+{
+  "name": "img-gen-via-svg",
+  "description": "Renders SVG to raster images at absolute pixel sizes, writing wherever you say, and reports every deviation from the document instead of rendering it wrong in silence.",
+  "version": "0.1.0",
+  "author": { "name": "derDere" }
+}
