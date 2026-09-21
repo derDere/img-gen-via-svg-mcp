@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "img-gen-via-svg": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--quiet",
+        "--no-project",
+        "--python",
+        ">=3.9",
+        "${CLAUDE_PLUGIN_ROOT}/bin/launch.py"
+      ],
+      "env": {
+        "IMG_SVG_MCP_PLUGIN_ROOT": "${CLAUDE_PLUGIN_ROOT}",
+        "IMG_SVG_MCP_PLUGIN_DATA": "${CLAUDE_PLUGIN_DATA}"
+      }
+    }
+  }
+}

@@ -163,6 +163,22 @@ server installs as a command entry in an `mcp.yaml` or a
 
 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) explains the choices.
 
+## As a Claude Code plugin
+
+This repository is also a Claude Code plugin, catalogued in the `derdere`
+marketplace:
+
+```
+/plugin marketplace add derDere/MyClaudeMarked
+/plugin install img-gen-via-svg@derdere
+```
+
+The plugin carries no binary. On first start its launcher looks for one that is
+already on the machine and otherwise downloads the release artefact for the
+platform; `/img-gen-via-svg:setup` builds one from these sources when neither
+applies. [`docs/PLUGIN.md`](docs/PLUGIN.md) explains the arrangement and what a
+user on an empty machine has to do.
+
 ## Documentation
 
 | Document | Contents |
@@ -171,6 +187,7 @@ server installs as a command entry in an `mcp.yaml` or a
 | [`docs/COMPARISON.md`](docs/COMPARISON.md) | Feature matrix against the six surveyed servers |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Stack decision and its rationale, module layout, pinned dependency versions |
 | [`docs/TESTPLAN.md`](docs/TESTPLAN.md) | How feature fidelity is proven: the corpus, the assertions, the no-silent-gap tests, and what is not covered yet |
+| [`docs/PLUGIN.md`](docs/PLUGIN.md) | The Claude Code plugin: its files, how the binary reaches a user's machine, and how to publish a release |
 | [`docs/OPEN_QUESTIONS.md`](docs/OPEN_QUESTIONS.md) | Decisions still to be made, each with a recommendation |
 
 ## Tests
