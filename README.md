@@ -1,0 +1,98 @@
+# img-gen-via-svg-mcp
+
+An MCP server that renders SVG to raster images — with absolute pixel sizes, a
+free output path, and full SVG feature fidelity.
+
+> **Status: specification.** This repository currently contains the complete,
+> implementation-ready specification. No server code exists yet. Everything an
+> implementer needs is in [`docs/`](docs/).
+
+## Why this server exists
+
+The project owner surveyed the SVG-to-raster MCP servers that were available and
+found that none of them satisfies all of the requirements below at the same
+time:
+
+| Server | Where it falls short |
+| --- | --- |
+| `mcp-svg-converter` (surferdot) | No absolute target size — scaling is expressed as a factor; output directories are whitelisted and a rejected path is silently redirected instead of refused |
+| `@svg-mcp/svg-mcp` | Writes into a temporary directory; the caller cannot choose where the file lands |
+| `image-processing-mcp` | General raster toolbox; SVG rendering is not its focus and SVG filter fidelity is not a stated goal |
+| `svg-converter-mcp` (ppbong) | PNG/JPEG only, driven by icon-set use cases rather than by render fidelity |
+| `magick-convert` | ImageMagick wrapper; SVG rendering quality depends on whichever delegate ImageMagick happens to find on the host |
+| `mcp-imagemagick` | Same dependency problem, plus an ImageMagick installation as a hard runtime requirement |
+
+[`docs/COMPARISON.md`](docs/COMPARISON.md) carries the full feature matrix and
+records which tool of this server replaces which foreign feature.
+
+This server is meant to replace all six. Every capability any of them offers is
+planned here as an optional feature, on top of the five requirements that are
+mandatory.
+
+## What it does
+
+* Takes an SVG as a **file path** (a source string or a URL works too).
+* Renders at an **absolute pixel size** — `width` and `height` in pixels, not a
+  scale factor. A scale factor is available as an alternative.
+* Fits the drawing into that size without distorting or cropping it, and says
+  exactly what fills the remaining border — transparent by default, a colour on
+  request, and white on the formats that have no alpha channel.
+* Writes **wherever the caller says**. A directory allowlist exists, but only
+  when the operator configures one, and a rejected path produces an error
+  rather than a silent redirect.
+* Encodes to **PNG, JPEG, BMP, GIF, TIFF, WebP, ICO, TGA, QOI, AVIF, PNM,
+  Farbfeld, OpenEXR and HDR**, plus ICNS for multi-resolution icons.
+* Renders the **whole of static SVG 1.1** — filters (blur, turbulence/grain,
+  displacement, morphology, convolution, lighting, drop shadow, compositing),
+  gradients, masks, clip paths, patterns, opacity, blend modes and text.
+  Whatever is not supported is named explicitly in the specification and
+  reported at runtime; this server never renders a missing feature silently.
+
+## The tools
+
+| Tool | Purpose |
+| --- | --- |
+| `render_svg` | Render one SVG to one raster image. The core tool. |
+| `render_svg_batch` | Render one SVG to many sizes and formats in a single call. |
+| `render_icon` | Build a multi-resolution `.ico`, `.icns` or PNG icon set. |
+| `probe_svg` | Report an SVG's intrinsic size, viewBox, feature inventory, font requirements and anything unsupported — without rendering. |
+| `optimize_svg` | Normalise and shrink an SVG. |
+| `convert_image` | Convert a raster image between formats and between files and Base64. |
+| `get_capabilities` | Report supported formats, the SVG feature matrix, known gaps, loaded fonts and the active configuration. |
+
+Full parameter schemas, defaults and error behaviour are in
+[`docs/SPEC.md`](docs/SPEC.md).
+
+## Implementation stack
+
+Rust, producing a single static binary with no runtime dependencies, for
+x86-64 Linux and x86-64 Windows:
+[`resvg`/`usvg`/`tiny-skia`](https://github.com/linebender/resvg) for rendering,
+the [`image`](https://github.com/image-rs/image) crate for encoding, and
+[`rmcp`](https://github.com/modelcontextprotocol/rust-sdk) — the official Rust
+MCP SDK — for the protocol. The transport is stdio and only stdio, so the
+server installs as a command entry in an `mcp.yaml` or a
+`claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "img-gen-via-svg": {
+      "command": "/usr/local/bin/img-gen-via-svg-mcp",
+      "args": []
+    }
+  }
+}
+```
+
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) explains the choices.
+
+## Documentation
+
+| Document | Contents |
+| --- | --- |
+| [`docs/SPEC.md`](docs/SPEC.md) | The specification: requirements, every tool with its full parameter schema, the error model, configuration, the fidelity contract |
+| [`docs/COMPARISON.md`](docs/COMPARISON.md) | Feature matrix against the six surveyed servers |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Stack decision and its rationale, module layout, pinned dependency versions |
+| [`docs/TESTPLAN.md`](docs/TESTPLAN.md) | How feature fidelity is proven: the SVG corpus, reference images, comparison metrics |
+| [`docs/OPEN_QUESTIONS.md`](docs/OPEN_QUESTIONS.md) | Decisions still to be made, each with a recommendation |
